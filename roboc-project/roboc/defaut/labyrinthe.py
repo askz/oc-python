@@ -8,5 +8,6 @@ class Labyrinthe:
 
   def __init__(self, robot, obstacles):
     self.robot = robot
-    self.grille = {}
-    # ...
+    self.mur = {}
+    self.porte = {}
+    self.sortie = {}

@@ -1,3 +1,4 @@
+#!/usr/bin/python3.4
 # -*-coding:Utf-8 -*
 
 """Ce fichier contient le code principal du jeu.
@@ -17,23 +18,28 @@ for nom_fichier in os.listdir("cartes"):
 		chemin = os.path.join("cartes", nom_fichier)
 		nom_carte = nom_fichier[:-3].lower()
 		with open(chemin, "r") as fichier:
-			contenu = fichier.read()
-			x = 1
-			y = 1
-			count = 1
-			print(nom_carte)
-			for case in contenu:
-				print("(" + str(y) + ":" + str(x) + ") => " + case)
-				if case == "\r" or case == "\n":
-					count += 1
-				# print(str(case))
-					if count % 2 == 0:
-						y += 1
-						x = 1
-						count = 1
-						continue
-				carte[x, y] = case
+			chaine = fichier.read()
+			x = 0
+			y = 0
+			for caractere in chaine:
+				if caractere == "\n":
+					y += 1
+					x = 0
+					continue
+				elif caractere == "\r":
+					continue
+				elif caractere == "O":
+					obstacle = "Mur"
+				elif caractere == ".":
+					obstacle = "Porte"
+				elif caractere == "U":
+					obstacle = "Sortie"
+				else:
+					pass
+				carte[x, y] = obstacle
+				print("(" + str(y) + ":" + str(x) + ") => " + obstacle)
 				x += 1
+		
 			# Création d'une carte, à compléter
 			# carte = Carte(nom_carte, contenu)
 			# cartes.append(carte)
